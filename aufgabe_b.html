@@ -1,0 +1,74 @@
+<!DOCTYPEhtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nullstellen quadratischer Polynome</title>
+</head>
+<body>
+    <h1>Nullstellen quadratischer Polynome</h1>
+    <p>Dieses Programm berechnet Nullstellen quadratischer Polynome der Form ax²+ bx + c und stellt die Lösung im Intervall x € |-10, 10| grafisch dar.</p>
+    <form id="eingabeFormular">
+        <label for="aWert">a: </label>
+        <input type="number" name="aWert" id="aWert">
+        <label for="bWert">b: </label>
+        <input type="number" name="bWert" id="bWert">
+        <label for="cWert">c: </label>
+        <input type="number" name="cWert" id="cWert"><br>
+        
+    </form>
+
+    <p><button onclick="nullStellenBerechnen(aWert, bWert, cWert)">Nullstellen berechnen</button></p>
+    <p id="ausgabe"></p>
+
+    <script>
+        let nullStellenBerechnen = () => {
+            let a = eingabeFormular.aWert.value, 
+                b = eingabeFormular.bWert.value,
+                c = eingabeFormular.cWert.value,
+                x1,
+                x2,
+                ergebnis;
+            
+            if(a==0) alert('Der Parameter a darf nicht null sein!!');
+            else{
+                if(a!=0 && b!=0 && c!=0){
+                    var p = b/a;
+                    var q = c/a;
+                    var delta = Math.pow((p/2), 2) - q;
+                    if(delta<0){
+                        ergebnis ="Das Polynom hat keine Nullstelle";
+                    }
+                    else if(delta == 0){
+                        x1 = -p/2;
+    
+                        ergebnis = "Das Polygon "+ a+"x² +"+b+"x +"+c +" hat die Nullstelle x = "+ x1;
+                    }
+                    else{
+                        x1 = -p /2 + Math.sqrt(delta);
+                        x2 = -p /2 - Math.sqrt(delta);
+                        ergebnis = "Das Polygon "+ a+"x² +"+b+"x +"+c +" hat die zwei Nullstellen x1 = "+ x1 + ", x2 = "+ x2;
+                    }
+                }
+                else if(a!=0 && b==0 && c!=0){
+                    if(c>0) alert('x² darf nicht negativ sein!!');
+                    else{
+                        x1 = Math.sqrt(-c/a);
+    
+                        ergebnis = "Das Polygon "+a+"x² "+" - "+ -c +" hat die  Nullstelle x = "+ x1;
+                    }
+                    
+
+                }
+                else if(a!=0 && b!=0 && c==0){
+                    x1 = -b/a;
+    
+                    ergebnis = "Das Polygon "+ a+"x² +"+b+"x" +" hat die Nullstelle x = "+ x1;
+
+                }
+                document.getElementById('ausgabe').innerText = ergebnis;
+            }
+        }      
+    </script>
+</body>
+</html>
